@@ -7,17 +7,74 @@
     android:padding="18dp"
     android:id="@+id/main"
     tools:context=".MainActivity">
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="DANH SASCH XE"
-        />
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <EditText
+            android:id="@+id/txtsearch"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="50dp"
+            android:hint="Search"
+            android:background="@drawable/trongsuot"
+            android:padding="14dp"
+            android:textSize="15dp"
+            />
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:text="Search"
+            android:textColor="#F1ECEC"
+            android:background="@drawable/btn"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="70dp"
+        >
+
+
+        <Button
+            android:id="@+id/btnTang"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:text="Tang"
+            android:textColor="#F1ECEC"
+            android:background="@drawable/btn"/>
+
+        <Button
+            android:id="@+id/btnGiam"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:text="Giam"
+            android:textColor="#F1ECEC"
+            android:background="@drawable/btn"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="30dp">
-
+        android:layout_marginTop="130dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DANH SASCH XE"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvSV"

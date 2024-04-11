@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements AdapterXemay.XeCl
 
     AdapterXemay adapter;
 
+    EditText txtsearch;
+    Button btnSearch, btnTang, btnGiam;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,52 @@ public class MainActivity extends AppCompatActivity implements AdapterXemay.XeCl
 
         fltadd = findViewById(R.id.fltadd);
         rcvSV = findViewById(R.id.rcvSV);
+        txtsearch = findViewById(R.id.txtsearch);
+        btnSearch = findViewById(R.id.btnSearch);
+        btnTang = findViewById(R.id.btnTang);
+        btnGiam = findViewById(R.id.btnGiam);
+
+        btnGiam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sort(-1);
+            }
+        });
+
+        btnTang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sort(1);
+
+            }
+        });
+
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tukhoa = txtsearch.getText().toString().trim();
+                Call<Response<List<Xemay>>> call = ApiService.apiservice.searchXe(tukhoa);
+                call.enqueue(new Callback<Response<List<Xemay>>>() {
+                    @Override
+                    public void onResponse(Call<Response<List<Xemay>>> call, retrofit2.Response<Response<List<Xemay>>> response) {
+                        if (response.isSuccessful()){
+                            if (response.body().getStatus() == 200){
+                                List<Xemay> ds = response.body().getData();
+                                loadData(ds);
+                                Toast.makeText(MainActivity.this, "search ok", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Response<List<Xemay>>> call, Throwable t) {
+                        Toast.makeText(MainActivity.this, "search fail", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
 
         getData();
 
@@ -63,6 +112,28 @@ public class MainActivity extends AppCompatActivity implements AdapterXemay.XeCl
             }
         });
     }
+
+    public void sort (int type){
+        Call<Response<List<Xemay>>> call = ApiService.apiservice.sortXe(type);
+        call.enqueue(new Callback<Response<List<Xemay>>>() {
+            @Override
+            public void onResponse(Call<Response<List<Xemay>>> call, retrofit2.Response<Response<List<Xemay>>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().getStatus() == 200){
+                        List<Xemay> ds = response.body().getData();
+                        loadData(ds);
+                        Toast.makeText(MainActivity.this, "sort ok", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response<List<Xemay>>> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     private void getData() {
 

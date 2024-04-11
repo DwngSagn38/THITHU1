@@ -14,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -50,4 +51,12 @@ public interface ApiService {
     Call<Response<Xemay>> updateXe (@Path("id") String id,
                                     @Body Xemay xemay);
 
+    // search
+    @GET("timkiem")
+    Call<Response<List<Xemay>>> searchXe (@Query("key") String key);
+
+
+    // sap xep
+    @GET("sapxep")
+    Call<Response<List<Xemay>>> sortXe (@Query("type") int type);
 }
